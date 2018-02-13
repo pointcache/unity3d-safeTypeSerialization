@@ -5,7 +5,7 @@
     using UnityEngine;
 
     [System.Serializable]
-    public class TypeField {
+    public class SerializedType {
 
         [SerializeField, HideInInspector]
         private string _targetID;
@@ -21,7 +21,7 @@
             }
         }
 
-        public static implicit operator Type(TypeField var) {
+        public static implicit operator Type(SerializedType var) {
             return var.Value;
         }
 

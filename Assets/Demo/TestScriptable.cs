@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TestScriptable : ScriptableObject {
 
-    public TypeField classToSpawn;
+    public SerializedType classToSpawn;
 
-    public List<TypeField> componentsToAdd = new List<TypeField>();
+    public List<SerializedType> componentsToAdd = new List<SerializedType>();
 }

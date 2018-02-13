@@ -6,8 +6,8 @@
     using UnityEngine;
 
 
-    [CustomPropertyDrawer(typeof(TypeField))]
-    public class TypeFieldDrawer : PropertyDrawer {
+    [CustomPropertyDrawer(typeof(SerializedType))]
+    public class SerializedTypeDrawer : PropertyDrawer {
 
         private const int kLineHeight = 16;
         private const int LeftOffset = 20;
