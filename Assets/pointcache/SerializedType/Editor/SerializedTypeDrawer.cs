@@ -24,38 +24,67 @@
                 pos = EditorGUI.PrefixLabel(pos, label);
             }
 
-            string[] Typenames = TypeExposeHandler.TypeNamesStringArr;
+            string[] Typenames = null;
+            string[] TypeIDs = null;
+
             if (attribute != null) {
+
                 SpecifyBaseTypeAttribute att = attribute as SpecifyBaseTypeAttribute;
-                Typenames = TypeExposeHandler.type_id_dict.Keys
-                    .Where(x => att.Type.IsAssignableFrom(x))
-                    .Select(x => x.Name)
-                    .ToArray();
+
+                List<KeyValuePair<Type, string>> filtered = new List<KeyValuePair<Type, string>>();
+
+                foreach (var item in TypeExposeHandler.type_id_dict) {
+                    if (att.Type.IsAssignableFrom(item.Key)) {
+                        filtered.Add(item);
+                    }
+                }
+                
+                int count = filtered.Count;
+
+                Typenames = new string[count + 1];
+                Typenames[0] = "null";
+
+                TypeIDs = new string[count + 1];
+                TypeIDs[0] = string.Empty;
+
+                for (int i = 1; i < count + 1; i++) {
+                    Typenames[i] = filtered[i - 1].Key.FullName;
+                    TypeIDs[i] = filtered[i - 1].Value;
+                }
 
             }
+            else {
 
-            string[] withNull = new string[Typenames.Length + 1];
-            withNull[0] = "null";
-            for (int i = 1; i < withNull.Length; i++) {
-                withNull[i] = Typenames[i - 1];
+                Typenames = new string[TypeExposeHandler.TypeNamesStringArr.Length + 1];
+                Typenames[0] = "null";
+
+                TypeIDs = new string[TypeExposeHandler.TypeAttributesIDStringArr.Length + 1];
+                TypeIDs[0] = string.Empty;
+
+                for (int i = 1; i < Typenames.Length; i++) {
+
+                    Typenames[i] = TypeExposeHandler.TypeNamesStringArr[i - 1];
+                    TypeIDs[i] = TypeExposeHandler.TypeAttributesIDStringArr[i - 1];
+
+                }
             }
 
             SerializedProperty idProp = prop.FindPropertyRelative("_targetID");
 
             string id = idProp.stringValue;
 
-            int currentIndex = Array.FindIndex(TypeExposeHandler.TypeAttributesIDStringArr, w => w == id);
+            int currentIndex = Array.FindIndex(TypeIDs, w => w == id);
 
             if (currentIndex == -1)
                 currentIndex = 0;
 
-            int newIndex = EditorGUI.Popup(pos, currentIndex, withNull);
+            int newIndex = EditorGUI.Popup(pos, currentIndex, Typenames);
             if (newIndex != currentIndex) {
                 if (newIndex == 0) {
                     idProp.stringValue = string.Empty;
                 }
                 else {
-                    idProp.stringValue = TypeExposeHandler.TypeAttributesIDStringArr[newIndex];
+                    idProp.stringValue = TypeIDs[newIndex];
                 }
             }
 
