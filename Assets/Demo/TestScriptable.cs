@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using pointcache.TypeField;
+using pointcache.SerializedType;
 using UnityEngine;
 
 public class TestScriptable : ScriptableObject {
@@ -8,4 +8,5 @@ public class TestScriptable : ScriptableObject {
     public SerializedType classToSpawn;
 
     public List<SerializedType> componentsToAdd = new List<SerializedType>();
+
 }

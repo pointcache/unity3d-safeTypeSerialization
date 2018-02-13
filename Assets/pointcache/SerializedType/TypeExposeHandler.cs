@@ -1,4 +1,4 @@
-﻿namespace pointcache.TypeField {
+﻿namespace pointcache.SerializedType {
 
     using System;
     using System.Collections;

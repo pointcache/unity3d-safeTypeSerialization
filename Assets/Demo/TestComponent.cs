@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using pointcache.TypeField;
+using pointcache.SerializedType;
 using UnityEngine;
 
 [ExposeType("asdasdasdas")]
