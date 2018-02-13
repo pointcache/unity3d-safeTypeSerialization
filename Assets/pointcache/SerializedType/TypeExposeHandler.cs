@@ -18,12 +18,20 @@
         public static string[] TypeNamesStringArr;
 
         public static Type GetTypeByID(string id) {
+
+            if(id == null || id == string.Empty) {
+                return null;
+            }
+
             Type type;
+
             if (!id_type_dict.TryGetValue(id, out type)) {
                 Debug.LogError(TYPEFIELD + " Upon deserialization, a serialized type with id: " + id + " , was not located in the codebase. Did you delete or change the TypeID attribute?");
                 return null;
             }
+
             return type;
+
         }
 
         static TypeExposeHandler() {
