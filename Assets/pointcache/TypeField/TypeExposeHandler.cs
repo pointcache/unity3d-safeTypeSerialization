@@ -43,9 +43,6 @@
         }
 
         static TypeExposeHandler() {
-
-            List<Type> types = new List<Type>();
-
             Assembly asmb = null;
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
