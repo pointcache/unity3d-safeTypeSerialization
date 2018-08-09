@@ -8,7 +8,7 @@ Add a ExposeTypeAttribute to every class that should be exposed to the type seri
 ```cs
 using pointcache.SerializedType;
 
-[ExposeType ("weapon")]
+[ExposeType ("anything can be here, some GUID or whatever you like, just make sure you dont change it")]
 public class Weapon {}
 ```
 
@@ -22,7 +22,8 @@ using pointcache.SerializedType;
 
 public class WeaponAsset : ScriptableObject
 {
-  [SerializeField]
+  // Will show only types derived from WeaponBase in inspector
+  [SpecifyBaseType(typeof(WeaponBase))]
   public SerializedType WeaponType;
 }
 ```
